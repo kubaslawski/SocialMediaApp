@@ -22,7 +22,7 @@ class Home extends Component {
     }
     render() {
         let recentTweetMarkup = this.state.tweets ? (
-        this.state.tweets.map(tweet => <Tweet tweet={tweet}></Tweet>)
+        this.state.tweets.map(tweet => <Tweet key={tweet.tweetId} tweet={tweet}></Tweet>)
         ) : <p>Loading...</p>
         return (
             <Grid container>
