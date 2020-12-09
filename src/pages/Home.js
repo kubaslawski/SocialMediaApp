@@ -13,7 +13,6 @@ class Home extends Component {
     componentDidMount(){
         axios.get(`${URL}/tweets`)
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     tweets: res.data
                 })
