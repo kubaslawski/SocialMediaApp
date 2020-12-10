@@ -3,15 +3,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import logo from '../images/logo.png';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 //MUI STUFF
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-//URL
-import {URL} from '../api/constants';
 //REDUX STUFF
 import {connect} from 'react-redux';
 import {loginUser} from '../redux/actions/userActions';
