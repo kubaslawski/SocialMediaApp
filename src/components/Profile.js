@@ -15,6 +15,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
+import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 //REDUX
 import {connect} from 'react-redux';
 import {logoutUser, uploadImage} from '../redux/actions/userActions';
@@ -77,10 +78,12 @@ class Profile extends Component {
         formData.append('image', image, image.name);
         this.props.uploadImage(formData);
     }
-
     handleEditPicture = () => {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
+    }
+    handleLogout = () => {
+        this.props.logoutUser();
     }
     render() {
         const {
@@ -130,9 +133,15 @@ class Profile extends Component {
                                 </a>
                             </Fragment>
                         )}
+                        <hr/>
                         <CalendarToday color="primary"/>{' '}
                         <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
                     </div>
+                    <Tooltip title="Logout" placement="top">
+                        <IconButton onClick={this.handleLogout}>
+                            <KeyboardReturn color="primary"/>
+                        </IconButton>
+                    </Tooltip>
                 </div>
             </Paper>
         ) : (
@@ -159,7 +168,7 @@ const mapStateToProps = state => ({
     user: state.user
 });
 
-const mapActionToProps = {
+const mapDispatchToProps = {
     logoutUser,
     uploadImage
 }
@@ -170,4 +179,4 @@ Profile.propTypes = {
     uploadImage: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(Profile))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile))
