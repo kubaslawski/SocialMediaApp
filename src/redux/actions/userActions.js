@@ -32,6 +32,15 @@ export const getUserData = () => dispatch => {
         .catch(err => console.log(err));
 }
 
+export const uploadImage = formData => dispatch => {
+    dispatch({type: LOADING_USER});
+    axios.post(`${URL}/user/image`, formData)
+        .then(res => {
+            dispatch(getUserData());
+        })
+        .catch(err => console.log(err))
+}
+
 export const signUpUser = (newUserData, history) => dispatch => {
     dispatch({type: LOADING_UI});
     axios.post(`${URL}/signup`, newUserData)
@@ -54,7 +63,6 @@ export const logoutUser = (dispatch) => {
     localStorage.removeItem('FBIdToken');
     delete axios.defaults.headers.common['Authorization']
     dispatch({type: SET_UNATHENTICATED});
-
 }
 
 
