@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+import MyButton from './MyButton';
 //REDUX
 import {connect} from 'react-redux';
 import {editUserDetails} from '../redux/actions/userActions';
@@ -19,7 +20,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const styles = (theme) => ({
     paper: {
       padding: 20,
-      margin: '0 0 0 20px'
+      margin: '0 0 0 20px',
     },
     profile: {
       '& .image-wrapper': {
@@ -62,6 +63,9 @@ const styles = (theme) => ({
       '& a': {
         margin: '20px 10px'
       }
+    },
+    button: {
+        float: 'right',
     }
   });
 
@@ -118,11 +122,9 @@ class EditDetails extends Component {
         return (
             <div>
                 <Fragment>
-                    <Tooltip title="Edit Details" placement="top">
-                        <IconButton onClick={this.handleOpen} className={classes.button}>
-                            <EditIcon color="primary"/>
-                        </IconButton>
-                    </Tooltip>
+                    <MyButton tip="Edit details" onClick={this.handleOpen} btnClassName={classes.button}>
+                        <EditIcon color="primary"/>
+                    </MyButton>
                     <Dialog 
                     open={this.state.open}
                     onClose={this.handleClose}
