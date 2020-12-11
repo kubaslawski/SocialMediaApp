@@ -94,10 +94,10 @@ class EditDetails extends Component {
         const {credentials} = this.props;
         this.mapUserDetailsToState(credentials);
     }
-    
-    handleChange = (event) => {
+
+    handleChange = (e) => {
         this.setState({
-          [event.target.name]: event.target.value
+          [e.target.name]: e.target.value
         });
       };
     
@@ -108,7 +108,7 @@ class EditDetails extends Component {
             location: this.state.location
         }
         this.props.editUserDetails(userDetails);
-        this.handleChange();
+        this.handleClose();
     }
 
 
