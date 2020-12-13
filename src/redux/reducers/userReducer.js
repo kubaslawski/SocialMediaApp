@@ -2,7 +2,8 @@ import {SET_USER,
     SET_AUTHENTICATED, 
     SET_UNATHENTICATED,
     LOADING_USER,
-    LOADING_UI
+    LIKE_TWEET,
+    UNLIKE_TWEET
 } from '../types';
 
 const initialState = {
@@ -32,6 +33,22 @@ export default function(state = initialState, action){
                 ...state,
                 loading: true
             }
+        case LIKE_TWEET:
+            return {
+                ...state,
+                likes: [
+                    ...state.likes,
+                    {
+                        user: state.credentials.handle,
+                        tweetId: action.payload.tweetId
+                    }
+                ]
+            }
+        case UNLIKE_TWEET:
+            return {
+                ...state,
+                likes: state.likes.filter(like => like.tweetId !== action.payload.tweetId)
+            };
         default:
             return state;
     }

@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 //URL
 import {URL} from "../api/constants";
 //Components
 import Tweet from "../components/Tweet";
 import Profile from "../components/Profile";
+//REDUX
+import {connect} from 'react-redux';
+import {getTweets} from '../redux/actions/dataActions';
 
 class Home extends Component {
     state = {
         tweets: null
     }
     componentDidMount(){
-        axios.get(`${URL}/tweets`)
-            .then(res => {
-                this.setState({
-                    tweets: res.data
-                })
-            })
-            .catch(err => console.log(err));
+        this.props.getTweets();
     }
     render() {
-        let recentTweetMarkup = this.state.tweets ? (
-        this.state.tweets.map(tweet => <Tweet key={tweet.tweetId} tweet={tweet}></Tweet>)
+        const {tweets, loading} = this.props.data;
+        let recentTweetMarkup = !loading ? (
+        tweets.map(tweet => <Tweet key={tweet.tweetId} tweet={tweet}></Tweet>)
         ) : <p>Loading...</p>
         return (
             <Grid container>
@@ -37,4 +36,13 @@ class Home extends Component {
     }
 }
 
-export default Home
+Home.propTypes = {
+    getTweets: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    data: state.data
+})
+
+export default connect(mapStateToProps, {getTweets})(Home);
