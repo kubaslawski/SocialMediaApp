@@ -1,4 +1,4 @@
-import {SET_TWEETS, LIKE_TWEET, UNLIKE_TWEET, LOADING_DATA, DELETE_TWEET, POST_TWEET} from '../types';
+import {SET_TWEETS, SET_TWEET, LIKE_TWEET, UNLIKE_TWEET, LOADING_DATA, DELETE_TWEET, POST_TWEET} from '../types';
 
 const initialState = {
     tweets: [],
@@ -18,6 +18,11 @@ export default function(state = initialState, action){
                 ...state,
                 tweets: action.payload,
                 loading: false
+            }
+        case SET_TWEET:
+            return {
+                ...state,
+                tweet: action.payload
             }
         case LIKE_TWEET:
         case UNLIKE_TWEET:

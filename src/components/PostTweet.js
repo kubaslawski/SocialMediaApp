@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 //REDUX
 import {connect} from 'react-redux';
-import {postTweet} from '../redux/actions/dataActions';
+import {postTweet, clearErrors} from '../redux/actions/dataActions';
 
 const styles = (theme) => ({
     paper: {
@@ -68,15 +68,17 @@ const styles = (theme) => ({
       }
     },
     submitButton: {
-        position: 'relative'
+        position: 'relative',
+        float: 'right',
+        marginTop: 10
     },
     progressSpinner: {
         position: 'absolute'
     },
     closeButton: {
         position: 'absolute',
-        left: '90%',
-        top: '10%'
+        left: '91%',
+        top: '6%'
     }
   });
 
@@ -93,8 +95,7 @@ class PostTweet extends Component {
             })
         };
         if(!nextProps.errors && !nextProps.UI.loading){
-            this.setState({content: ''});
-            this.handleClose();
+            this.setState({content: '', open: false, errors: {}});
         }
     }
 
@@ -102,6 +103,7 @@ class PostTweet extends Component {
         this.setState({open: true})
     }
     handleClose = () => {
+        this.props.clearErrors();
         this.setState({open: false, errors: {}})
     }
     handleChange = e => {
@@ -159,6 +161,7 @@ class PostTweet extends Component {
 
 PostTweet.propTypes = {
     postTweet: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     UI: PropTypes.object.isRequired
 };
 
@@ -166,4 +169,4 @@ const mapStateToProps = state => ({
     UI: state.UI
 })
 
-export default connect(mapStateToProps, {postTweet})(withStyles(styles)(PostTweet))
+export default connect(mapStateToProps, {postTweet, clearErrors})(withStyles(styles)(PostTweet))
