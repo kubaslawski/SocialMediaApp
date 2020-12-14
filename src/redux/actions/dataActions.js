@@ -1,4 +1,13 @@
-import {SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET, SET_ERRORS} from '../types';
+import {
+    SET_TWEETS, 
+    LOADING_DATA, 
+    POST_TWEET,
+    LIKE_TWEET, 
+    UNLIKE_TWEET, 
+    SET_ERRORS,
+    DELETE_TWEET,
+    LOADING_UI,
+    CLEAR_ERRORS} from '../types';
 import axios from 'axios';
 import {URL} from '../../api/constants';
 
@@ -16,6 +25,25 @@ export const getTweets = () => dispatch => {
             dispatch({
                 type: SET_TWEETS,
                 payload: []
+            })
+        })
+}
+
+//Post tweet
+export const postTweet = newTweet => dispatch => {
+    dispatch({type: LOADING_UI})
+    axios.post(`${URL}/create-tweet`, newTweet)
+        .then(res => {
+            dispatch({
+                type: POST_TWEET,
+                payload: res.data
+            });
+            dispatch({type: CLEAR_ERRORS});
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
             })
         })
 }
@@ -43,4 +71,13 @@ export const unlikeTweet = tweetId => dispatch => {
             })
         })
         .catch(err => console.log(err))
+}
+
+export const deleteTweet = tweetId => dispatch => {
+    axios
+        .delete(`${URL}/tweet/${tweetId}`)
+        .then(() => {
+            dispatch({type: DELETE_TWEET, payload: tweetId});
+        })
+        .catch(err => console.log(err));
 }

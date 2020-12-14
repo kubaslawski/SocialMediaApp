@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
 import MyButton from './MyButton';
+import DeleteTweet from './DeleteTweet';
 //MUI Stuff
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -23,6 +24,7 @@ import { Favorite } from '@material-ui/icons';
 
 const styles = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20,
     },
@@ -67,7 +69,10 @@ class Tweet extends Component {
             likeCount, 
             commentCount},
             user: {
-                authenticated
+                authenticated,
+                credentials: {
+                    handle
+                }
             }
         } = this.props
 
@@ -89,6 +94,10 @@ class Tweet extends Component {
             )
         )
 
+        const deleteButton = authenticated && handle === user ? (
+            <DeleteTweet tweetId={tweetId}/>
+        ) : null
+
 
         return (
             <Card className={classes.card}>
@@ -100,6 +109,7 @@ class Tweet extends Component {
                     <Typography variant="h5" color="primary" component={Link} to={`/users/${user}`}>
                         {user}
                     </Typography>
+                    {deleteButton}
                     <Typography variant="body2" color="textSecondary">
                         {dayjs(createdAt).fromNow()}
                     </Typography>
