@@ -27,10 +27,10 @@ export default function(state = initialState, action){
                 ...state
             }
         case DELETE_TWEET:
-            index = state.tweets.findIndex(
+            let index1 = state.tweets.findIndex(
             (tweet) => tweet.tweetId === action.payload
             );
-            state.tweets.splice(index, 1);
+            state.tweets.splice(index1, 1);
             return {
               ...state
             };
