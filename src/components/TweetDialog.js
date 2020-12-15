@@ -5,6 +5,9 @@ import MyButton from "./MyButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import {URL} from '../api/constants';
+import LikeButton from './LikeButton';
+import Comments from './Comments';
+import CommentForm from './CommentForm';
 //MUI STUFF
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -18,9 +21,10 @@ import Typography from "@material-ui/core/Typography";
 //Icons
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
+import ChatIcon from "@material-ui/icons/Chat";
 //Redux
 import { connect } from "react-redux";
-import { getTweet } from "../redux/actions/dataActions";
+import { getTweet, clearErrors } from "../redux/actions/dataActions";
 
 const styles = (theme) => ({
     paper: {
@@ -98,6 +102,23 @@ const styles = (theme) => ({
     closeButton: {
         position: 'absolute',
         left: '90%'
+    },
+    expandButton: {
+        position: 'absolute',
+        left: '90%'
+    },
+    spinnerDiv: {
+        textAlign: 'center',
+        marginTop: 50,
+        marginBottom: 50
+    },
+    visibleSeparator: {
+      width: '100%',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+      marginBottom: 20
+    },
+    commentData: {
+      marginLeft: 20
     }
   });
 
@@ -111,6 +132,7 @@ class PostDialog extends Component {
   };
   handleClose = () => {
     this.setState({ open: false });
+    this.props.clearErrors();
   };
   render() {
     const {
@@ -123,12 +145,15 @@ class PostDialog extends Component {
         commentCount,
         userImage,
         user,
+        comments
       },
       UI: { loading },
     } = this.props;
 
     const dialogMarkup = loading ? (
-        <CircularProgress size={200}/>
+        <div className={classes.spinnerDiv}>
+            <CircularProgress size={200} thickness={2}/>
+        </div>
     ) : (
         <Grid container spacing={16}>
             <Grid item sm={5}>
@@ -150,7 +175,16 @@ class PostDialog extends Component {
                     <Typography variant="body1">
                         {content}
                     </Typography>
+                    <LikeButton tweetId={tweetId}/>
+                    <span>{likeCount} likes</span>
+                    <MyButton tip="comments">
+                        <ChatIcon color="primary"/>
+                    </MyButton>
+                    <span>{commentCount} Comments</span>
             </Grid>
+            <hr className={classes.invisibleSeparator}/>
+            <CommentForm tweetId={tweetId}/>
+            <Comments comments={comments}/>
         </Grid>
     )
 
@@ -179,6 +213,7 @@ PostDialog.propTypes = {
   user: PropTypes.string.isRequired,
   tweet: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -188,6 +223,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getTweet,
+  clearErrors
 };
 
 export default connect(

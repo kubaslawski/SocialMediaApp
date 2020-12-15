@@ -9,6 +9,7 @@ import {
     LOADING_UI,
     STOP_LOADING_UI,
     CLEAR_ERRORS,
+    SUBMIT_COMMENT,
     SET_TWEET} from '../types';
 import axios from 'axios';
 import {URL} from '../../api/constants';
@@ -33,7 +34,7 @@ export const getTweets = () => dispatch => {
 
 export const getTweet = tweetId => dispatch => {
     dispatch({type: LOADING_UI});
-    axios.get(`${URL}/tweets/${tweetId}`)
+    axios.get(`${URL}/tweet/${tweetId}`)
         .then(res => {
             dispatch({
                 type: SET_TWEET,
@@ -55,7 +56,25 @@ export const postTweet = newTweet => dispatch => {
                 type: POST_TWEET,
                 payload: res.data
             });
-            dispatch({type: CLEAR_ERRORS});
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
+//Submit comment 
+export const submitComment = (tweetId, commentData) => dispatch => {
+    axios.post(`${URL}/tweet/${tweetId}/comment`, commentData)
+        .then(res => {
+            dispatch({
+                type: SUBMIT_COMMENT,
+                payload: res.data
+            });
+            dispatch(clearErrors())
         })
         .catch(err => {
             dispatch({
