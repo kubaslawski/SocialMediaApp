@@ -11,10 +11,13 @@ import {getUserData} from '../redux/actions/dataActions';
 
 export class User extends Component {
     state = {
-        profile: {}
+        profile: {},
+        tweetIdParam: null
     }
     componentDidMount(){
         const handle = this.props.match.params.handle;
+        const tweetId = this.props.match.params.tweetId;
+        if(tweetId) this.setState({tweetIdParam: tweetId});
         this.props.getUserData(handle);
         axios.get(`${URL}/user/${handle}`)
             .then(res => {
@@ -27,13 +30,20 @@ export class User extends Component {
     render() {
         
         const {tweets, loading} = this.props.data;
+        const {tweetIdParam} = this.state;
 
         const tweetsMarkup = loading ? (
             <p>loading data...</p>
         ) : tweets === null ? (
             <p>No tweets from this user</p>
-        ) : (
+        ) : !tweetIdParam ? (
             tweets.map(tweet => <Tweet key={tweet.tweetId} tweet={tweet}/>)
+        ) : (
+            tweets.map(tweet => {
+                if(tweet.tweetId !== tweetIdParam)
+                return <Tweet key={tweet.tweetId} tweet={tweet}/>
+                else return <Tweet key={tweet.tweetId} tweet={tweet} openDialog/>
+            })
         )
         return (
             <Grid container>

@@ -1,4 +1,4 @@
-import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNATHENTICATED, LOADING_USER} from '../types';
+import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNATHENTICATED, LOADING_USER, MARK_NOTIFICATIONS_READ} from '../types';
 import {URL} from '../../api/constants';
 import axios from 'axios';
 
@@ -70,6 +70,16 @@ export const editUserDetails = userDetails => dispatch => {
     axios.post(`${URL}/user`, userDetails)
         .then(() => {
             dispatch(getUserData());
+        })
+        .catch(err => console.log(err));
+}
+
+export const markNotificationsRead = notifications => dispatch => {
+    axios.post(`${URL}/notifications`, notifications)
+        .then(res => {
+            dispatch({
+                type: MARK_NOTIFICATIONS_READ
+            })
         })
         .catch(err => console.log(err));
 }

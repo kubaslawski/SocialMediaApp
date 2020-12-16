@@ -3,7 +3,8 @@ import {SET_USER,
     SET_UNATHENTICATED,
     LOADING_USER,
     LIKE_TWEET,
-    UNLIKE_TWEET
+    UNLIKE_TWEET,
+    MARK_NOTIFICATIONS_READ
 } from '../types';
 
 const initialState = {
@@ -49,6 +50,11 @@ export default function(state = initialState, action){
                 ...state,
                 likes: state.likes.filter(like => like.tweetId !== action.payload.tweetId)
             };
+        case MARK_NOTIFICATIONS_READ:
+            state.notifications.forEach(not => not.read = true)
+            return {
+                ...state
+            }
         default:
             return state;
     }

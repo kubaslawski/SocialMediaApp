@@ -88,7 +88,7 @@ class Tweet extends Component {
                         <ChatIcon color="primary"/>
                     </MyButton>
                     <span>{commentCount} Comments</span>
-                    <TweetDialog tweetId={tweetId} user={user}/>
+                    <TweetDialog tweetId={tweetId} user={user} openDialog={this.props.openDialog}/>
                 </CardContent>
             </Card>
         )
@@ -98,7 +98,8 @@ class Tweet extends Component {
 Tweet.propTypes = {
     user: PropTypes.object.isRequired,
     tweet: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
