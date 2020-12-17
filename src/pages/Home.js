@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
-//URL
-import {URL} from "../api/constants";
 //Components
 import Tweet from "../components/Tweet";
 import Profile from "../components/Profile";

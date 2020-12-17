@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
-import {URL} from '../api/constants';
 //MUI
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -61,7 +60,6 @@ class Notifications extends Component{
         let notificationsMarkup = 
             notifications && notifications.length > 0 ? (
                 notifications.map(not => {
-                    console.log(not)
                     const verb = not.type === 'like' ? 'liked' : 'commented on';
                     const time = dayjs(not.createdAt).fromNow();
                     const iconColor = not.read ? 'primary' : 'secondary'
@@ -78,7 +76,7 @@ class Notifications extends Component{
                                 component={Link}
                                 color="default"
                                 variant="body1"
-                                to={`/users/${not.recipient}/tweet/${not.notificationId}`}
+                                to={`/users/${not.recipient}/tweet/${not.tweetId}`}
                             >
                                 {not.sender} {verb} your tweet {time}
                             </Typography>

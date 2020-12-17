@@ -10,11 +10,7 @@ import Comments from './Comments';
 import CommentForm from './CommentForm';
 //MUI STUFF
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -80,11 +76,6 @@ const styles = (theme) => ({
     },
     progressSpinner: {
         position: 'absolute'
-    },
-    closeButton: {
-        position: 'absolute',
-        left: '91%',
-        top: '6%'
     },
     invisibleSeparator: {
         border: 'none',

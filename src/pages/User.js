@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import {URL} from '../api/constants';
 import StaticProfile from '../components/StaticProfile';
 import ProfileSkeleton from '../components/ProfileSkeleton';
+import TweetSkeleton from '../components/TweetSkeleton';
 
 import {connect} from 'react-redux';
 import {getUserData} from '../redux/actions/dataActions';
@@ -29,12 +30,12 @@ export class User extends Component {
             .catch(err => console.log(err));
     }
     render() {
-        
+        console.log(this.props)
         const {tweets, loading} = this.props.data;
         const {tweetIdParam} = this.state;
 
         const tweetsMarkup = loading ? (
-            <Tweet/>
+            <TweetSkeleton/>
         ) : tweets === null ? (
             <p>No tweets from this user</p>
         ) : !tweetIdParam ? (

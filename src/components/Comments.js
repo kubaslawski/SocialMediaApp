@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Link} from 'react-router-dom';
-import {URL} from '../api/constants';
 import dayjs from 'dayjs';
 //MUI
 import Grid from '@material-ui/core/Grid';
@@ -63,11 +62,6 @@ const styles = (theme) => ({
     },
     progressSpinner: {
         position: 'absolute'
-    },
-    closeButton: {
-        position: 'absolute',
-        left: '91%',
-        top: '6%'
     },
     invisibleSeparator: {
         border: 'none',

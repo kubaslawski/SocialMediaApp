@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import MyButton from './MyButton';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
 //Mui
@@ -84,10 +82,6 @@ const styles = (theme) => ({
     dialogContent: {
         padding: 20
     },
-    closeButton: {
-        position: 'absolute',
-        left: '90%'
-    },
     expandButton: {
         position: 'absolute',
         left: '90%'
@@ -147,8 +141,8 @@ class CommentForm extends Component {
                         name="content"
                         type="text"
                         label="Comment on tweet"
-                        // error={errors.comment ? true : false}
-                        // helperText={errors.comment}
+                        error={errors.comment ? true : false}
+                        helperText={errors.comment}
                         value={this.state.content}
                         onChange={this.handleChange}
                         fullWidth 

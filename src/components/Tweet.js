@@ -10,8 +10,6 @@ import TweetDialog from './TweetDialog';
 import LikeButton from './LikeButton';
 //MUI Stuff
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +17,6 @@ import Typography from '@material-ui/core/Typography';
 import ChatIcon from '@material-ui/icons/Chat';
 //Redux
 import {connect} from 'react-redux';
-import { Favorite } from '@material-ui/icons';
 
 const styles = {
     card: {
@@ -40,7 +37,6 @@ class Tweet extends Component {
 
 
     render() { 
-
         dayjs.extend(relativeTime)
         const {classes, tweet: { 
             content, 
