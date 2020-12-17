@@ -7,6 +7,8 @@ import {URL} from "../api/constants";
 //Components
 import Tweet from "../components/Tweet";
 import Profile from "../components/Profile";
+import TweetSkeleton from '../components/TweetSkeleton';
+
 //REDUX
 import {connect} from 'react-redux';
 import {getTweets} from '../redux/actions/dataActions';
@@ -22,7 +24,9 @@ class Home extends Component {
         const {tweets, loading} = this.props.data;
         let recentTweetMarkup = !loading ? (
         tweets.map(tweet => <Tweet key={tweet.tweetId} tweet={tweet}></Tweet>)
-        ) : <p>Loading...</p>
+        ) : (
+        <TweetSkeleton/>
+        )
         return (
             <Grid container>
                 <Grid item sm={8} xs={12}>

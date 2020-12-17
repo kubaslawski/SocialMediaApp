@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import EditDetails from './EditDetails';
 import MyButton from './MyButton';
+import ProfileSkeleton from './ProfileSkeleton';
 //MUI 
 import Button from '@material-ui/core/Button';
 import MuiLink from '@material-ui/core/Link';
@@ -155,7 +156,9 @@ class Profile extends Component {
                     </Button>
                 </div>
             </Paper>
-        )) : (<p>loading...</p>)
+        )) : (
+            <ProfileSkeleton/>            
+        )
 
         return profileMarkup;
     }

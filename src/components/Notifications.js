@@ -61,6 +61,7 @@ class Notifications extends Component{
         let notificationsMarkup = 
             notifications && notifications.length > 0 ? (
                 notifications.map(not => {
+                    console.log(not)
                     const verb = not.type === 'like' ? 'liked' : 'commented on';
                     const time = dayjs(not.createdAt).fromNow();
                     const iconColor = not.read ? 'primary' : 'secondary'
@@ -77,7 +78,7 @@ class Notifications extends Component{
                                 component={Link}
                                 color="default"
                                 variant="body1"
-                                to={`${URL}/users/${not.recipient}/tweet/${not.tweetId}`}
+                                to={`/users/${not.recipient}/tweet/${not.notificationId}`}
                             >
                                 {not.sender} {verb} your tweet {time}
                             </Typography>
@@ -114,7 +115,7 @@ class Notifications extends Component{
 
 Notifications.propTypes = {
     markNotificationsRead: PropTypes.func.isRequired,
-    notifications: PropTypes.object.isRequired
+    notifications: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
