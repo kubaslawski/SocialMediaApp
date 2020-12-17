@@ -1,15 +1,66 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Tweet from '../components/Tweet';
 import Grid from '@material-ui/core/Grid';
-import {URL} from '../api/constants';
-import StaticProfile from '../components/StaticProfile';
-import ProfileSkeleton from '../components/ProfileSkeleton';
-import TweetSkeleton from '../components/TweetSkeleton';
-
+import {URL} from '../util/constants';
+//components
+import StaticProfile from '../components/profile/StaticProfile';
+import ProfileSkeleton from '../util/ProfileSkeleton';
+import TweetSkeleton from '../util/TweetSkeleton';
+import Tweet from '../components/tweet/Tweet';
 import {connect} from 'react-redux';
 import {getUserData} from '../redux/actions/dataActions';
+
+const styles = (theme) => ({
+    paper: {
+      padding: 20,
+      margin: '0 20px 20px 20px'
+    },
+    profile: {
+      '& .image-wrapper': {
+        textAlign: 'center',
+        position: 'relative',
+        '& button': {
+          position: 'absolute',
+          top: '80%',
+          left: '70%'
+        }
+      },
+      '& .profile-image': {
+        width: 200,
+        height: 200,
+        objectFit: 'cover',
+        maxWidth: '100%',
+        borderRadius: '50%'
+      },
+      '& .profile-details': {
+        textAlign: 'center',
+        '& span, svg': {
+          verticalAlign: 'middle'
+        },
+        '& a': {
+          color: theme.palette.primary.main
+        }
+      },
+      '& hr': {
+        border: 'none',
+        margin: '0 0 10px 0'
+      },
+      '& svg.button': {
+        '&:hover': {
+          cursor: 'pointer'
+        }
+      }
+    },
+    buttons: {
+      textAlign: 'center',
+      '& a': {
+        margin: '20px 10px'
+      }
+    }
+  });
+
+
 
 export class User extends Component {
     state = {

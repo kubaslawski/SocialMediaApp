@@ -1,0 +1,1 @@
+export const URL = "https://europe-west1-twitterapp-93e1d.cloudfunctions.net/api"

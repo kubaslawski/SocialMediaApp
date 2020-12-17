@@ -12,7 +12,7 @@ import {
     SUBMIT_COMMENT,
     SET_TWEET} from '../types';
 import axios from 'axios';
-import {URL} from '../../api/constants';
+import {URL} from '../../util/constants';
 
 //Gettings tweets
 export const getTweets = () => dispatch => {

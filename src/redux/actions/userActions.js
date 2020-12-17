@@ -1,5 +1,5 @@
 import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNATHENTICATED, LOADING_USER, MARK_NOTIFICATIONS_READ} from '../types';
-import {URL} from '../../api/constants';
+import {URL} from '../../util/constants';
 import axios from 'axios';
 
 

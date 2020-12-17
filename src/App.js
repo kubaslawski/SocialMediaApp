@@ -4,15 +4,15 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwtDecode from 'jwt-decode';
-import themeObject from './theme';
+import themeObject from './util/theme';
 //Pages
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import User from './pages/User';
 //Components
-import Navbar from './components/Navbar';
-import AuthRoute from './components/AuthRoute'
+import Navbar from './components//layout/Navbar';
+import AuthRoute from './util/AuthRoute'
 //Redux
 import {Provider} from 'react-redux';
 import store from './redux/store';
