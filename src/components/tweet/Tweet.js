@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import MyButton from '../../util/MyButton';
 import DeleteTweet from './DeleteTweet';
 import TweetDialog from './TweetDialog';
-import LikeButton from '../profile/LikeButton';
+import LikeButton from './LikeButton';
 //MUI Stuff
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -20,18 +20,18 @@ import {connect} from 'react-redux';
 
 const styles = {
     card: {
-        position: 'relative',
-        display: 'flex',
-        marginBottom: 20,
+      position: 'relative',
+      display: 'flex',
+      marginBottom: 20
     },
     image: {
-        minWidth: 200,
+      minWidth: 200
     },
     content: {
-        padding: 25,
-        objectFit: 'cover'
+      padding: 25,
+      objectFit: 'cover'
     }
-}
+  };
 
 class Tweet extends Component {
 

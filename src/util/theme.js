@@ -13,6 +13,7 @@ export default {
       contrastText: '#fff'
     }
   },
+  themeToSpread: {
   typography: {
     useNextVariants: true
   },
@@ -94,4 +95,5 @@ export default {
       margin: '20px 10px'
     }
   }
+}
 };
