@@ -62,7 +62,7 @@ const styles = (theme) => ({
 
 
 
-export class User extends Component {
+class User extends Component {
     state = {
         profile: {},
         tweetIdParam: null

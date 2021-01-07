@@ -1,4 +1,5 @@
-import {SET_USER, 
+import {
+    SET_USER, 
     SET_AUTHENTICATED, 
     SET_UNATHENTICATED,
     LOADING_USER,

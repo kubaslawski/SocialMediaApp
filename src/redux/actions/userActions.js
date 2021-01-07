@@ -1,11 +1,12 @@
 import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNATHENTICATED, LOADING_USER, MARK_NOTIFICATIONS_READ} from '../types';
 import {URL} from '../../util/constants';
 import axios from 'axios';
+axios.defaults.baseURL = "https://europe-west1-twitterapp-93e1d.cloudfunctions.net/api"
 
 
 export const loginUser = (userData, history) => dispatch => {
     dispatch({type: LOADING_UI});
-    axios.post(`${URL}/login`, userData)
+    axios.post(`/login`, userData)
         .then(res => {
             setAuthorizationHeader(res.data.token)
             dispatch(getUserData());
@@ -22,7 +23,7 @@ export const loginUser = (userData, history) => dispatch => {
 
 export const getUserData = () => dispatch => {
     dispatch({type: LOADING_USER})
-    axios.get(`${URL}/user`)
+    axios.get(`/user`)
         .then(res => {
             dispatch({
                 type: SET_USER,
@@ -32,18 +33,19 @@ export const getUserData = () => dispatch => {
         .catch(err => console.log(err));
 }
 
-export const uploadImage = formData => dispatch => {
-    dispatch({type: LOADING_USER});
-    axios.post(`${URL}/user/image`, formData)
-        .then(res => {
-            dispatch(getUserData());
-        })
-        .catch(err => console.log(err))
-}
+export const uploadImage = (formData) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    axios
+      .post(`/user/image`, formData)
+      .then(() => {
+        dispatch(getUserData());
+      })
+      .catch((err) => console.log(err));
+  };
 
 export const signUpUser = (newUserData, history) => dispatch => {
     dispatch({type: LOADING_UI});
-    axios.post(`${URL}/signup`, newUserData)
+    axios.post(`/signup`, newUserData)
         .then(res => {
             setAuthorizationHeader(res.data.token)
             dispatch(getUserData());
@@ -67,7 +69,7 @@ export const logoutUser = () => dispatch => {
 
 export const editUserDetails = userDetails => dispatch => {
     dispatch({type: LOADING_USER})
-    axios.post(`${URL}/user`, userDetails)
+    axios.post(`/user`, userDetails)
         .then(() => {
             dispatch(getUserData());
         })
@@ -75,7 +77,7 @@ export const editUserDetails = userDetails => dispatch => {
 }
 
 export const markNotificationsRead = notifications => dispatch => {
-    axios.post(`${URL}/notifications`, notifications)
+    axios.post(`/notifications`, notifications)
         .then(res => {
             dispatch({
                 type: MARK_NOTIFICATIONS_READ

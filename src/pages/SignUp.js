@@ -91,6 +91,7 @@ class SignUp extends Component {
                         name='email' 
                         type='email'
                         label='Email'
+                        autoComplete="off"
                         className={classes.textField}
                         value={this.state.email}
                         onChange={this.handleChange}
@@ -102,6 +103,7 @@ class SignUp extends Component {
                         name='password' 
                         type='password'
                         label='Password'
+                        autoComplete="off"
                         className={classes.textField}
                         value={this.state.password}
                         onChange={this.handleChange}
@@ -112,6 +114,7 @@ class SignUp extends Component {
                         id='confirmPassword' 
                         name='confirmPassword' 
                         type='password'
+                        autoComplete="off"
                         label='Confirm Password'
                         className={classes.textField}
                         value={this.state.confirmPassword}
@@ -124,6 +127,7 @@ class SignUp extends Component {
                         name='handle' 
                         type='text'
                         label='Handle'
+                        autoComplete="off"
                         className={classes.textField}
                         value={this.state.handle}
                         onChange={this.handleChange}

@@ -10,14 +10,16 @@ import {
     STOP_LOADING_UI,
     CLEAR_ERRORS,
     SUBMIT_COMMENT,
-    SET_TWEET} from '../types';
+    SET_TWEET
+} from '../types';
 import axios from 'axios';
 import {URL} from '../../util/constants';
+axios.defaults.baseURL = "https://europe-west1-twitterapp-93e1d.cloudfunctions.net/api"
 
 //Gettings tweets
 export const getTweets = () => dispatch => {
     dispatch({type: LOADING_DATA})
-    axios.get(`${URL}/tweets`)
+    axios.get(`/tweets`)
         .then(res => {
             dispatch({
                 type: SET_TWEETS,
@@ -34,7 +36,7 @@ export const getTweets = () => dispatch => {
 
 export const getTweet = tweetId => dispatch => {
     dispatch({type: LOADING_UI});
-    axios.get(`${URL}/tweet/${tweetId}`)
+    axios.get(`/tweet/${tweetId}`)
         .then(res => {
             dispatch({
                 type: SET_TWEET,
@@ -50,7 +52,7 @@ export const getTweet = tweetId => dispatch => {
 //Post tweet
 export const postTweet = newTweet => dispatch => {
     dispatch({type: LOADING_UI})
-    axios.post(`${URL}/create-tweet`, newTweet)
+    axios.post(`/create-tweet`, newTweet)
         .then(res => {
             dispatch({
                 type: POST_TWEET,
@@ -68,7 +70,7 @@ export const postTweet = newTweet => dispatch => {
 
 //Submit comment 
 export const submitComment = (tweetId, commentData) => dispatch => {
-    axios.post(`${URL}/tweet/${tweetId}/comment`, commentData)
+    axios.post(`/tweet/${tweetId}/comment`, commentData)
         .then(res => {
             dispatch({
                 type: SUBMIT_COMMENT,
@@ -86,7 +88,7 @@ export const submitComment = (tweetId, commentData) => dispatch => {
 
 //Like tweet 
 export const likeTweet = tweetId => dispatch => {
-    axios.get(`${URL}/tweet/${tweetId}/like`)
+    axios.get(`/tweet/${tweetId}/like`)
         .then(res => {
             dispatch({
                 type: LIKE_TWEET,
@@ -99,7 +101,7 @@ export const likeTweet = tweetId => dispatch => {
 
 //Unlike tweet
 export const unlikeTweet = tweetId => dispatch => {
-    axios.get(`${URL}/tweet/${tweetId}/unlike`)
+    axios.get(`/tweet/${tweetId}/unlike`)
         .then(res => {
             dispatch({
                 type: UNLIKE_TWEET,
@@ -111,7 +113,7 @@ export const unlikeTweet = tweetId => dispatch => {
 
 export const deleteTweet = tweetId => dispatch => {
     axios
-        .delete(`${URL}/tweet/${tweetId}`)
+        .delete(`/tweet/${tweetId}`)
         .then(() => {
             dispatch({type: DELETE_TWEET, payload: tweetId});
         })
@@ -125,7 +127,7 @@ export const clearErrors = () => dispatch => {
 //user Data
 export const getUserData = handle => dispatch => {
     dispatch({type: LOADING_DATA})
-    axios.get(`${URL}/user/${handle}`)
+    axios.get(`/user/${handle}`)
         .then(res => {
             dispatch({
                 type: SET_TWEETS,

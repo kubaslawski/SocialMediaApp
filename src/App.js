@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwtDecode from 'jwt-decode';
 import themeObject from './util/theme';
@@ -11,7 +11,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import User from './pages/User';
 //Components
-import Navbar from './components//layout/Navbar';
+import Navbar from './components/layout/Navbar';
 import AuthRoute from './util/AuthRoute'
 //Redux
 import {Provider} from 'react-redux';
@@ -21,6 +21,9 @@ import {logoutUser, getUserData} from './redux/actions/userActions';
 import axios from 'axios';
 
 const theme = createMuiTheme(themeObject);
+
+
+axios.defaults.baseURL = "https://europe-west1-twitterapp-93e1d.cloudfunctions.net/api"
 
 const token = localStorage.FBIdToken;
 if (token) {
@@ -37,6 +40,7 @@ if (token) {
 
 class App extends Component{
   render() {
+
   return (
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
@@ -60,7 +64,7 @@ class App extends Component{
         </div>
       </Router>
       </Provider>
-    </MuiThemeProvider>
+     </MuiThemeProvider>
   );
   }
 }

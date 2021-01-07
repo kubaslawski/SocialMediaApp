@@ -68,6 +68,7 @@ class Login extends Component {
                         name='email' 
                         type='email'
                         label='Email'
+                        autoComplete="off"
                         className={classes.textField}
                         value={this.state.email}
                         onChange={this.handleChange}
@@ -79,6 +80,7 @@ class Login extends Component {
                         name='password' 
                         type='password'
                         label='Password'
+                        autoComplete="off"
                         className={classes.textField}
                         value={this.state.password}
                         onChange={this.handleChange}
