@@ -8,7 +8,9 @@ In the project directory, you can run:
 
 ### `Hosting`
 The projects is hosted on: https://twitterapp-93e1d.web.app/
+
 To login:
+
 -email: user@email.com  
 -password: 123456
 
